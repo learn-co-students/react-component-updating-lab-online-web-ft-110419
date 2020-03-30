@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 
+/**
+ * React builds a virtual DOM when it renders JSX, allowing it to update the actual DOM in a very efficient way.Accessing the DOM directly comes with some caution as it circumvents React's default behavior. For this reason, it is better to handle most style changes using an external CSS file or in-line within JSX, if possible.
+ * */
+
 class Timer extends Component {
   constructor() {
     super();
@@ -11,6 +15,16 @@ class Timer extends Component {
   }
 
   //Your code here
+  componentDidUpdate() {
+    // using ref here will override the style property in the DOM but does not set the state
+    this.timer.current.style.color =
+      "#" + Math.floor(Math.random() * 16777215).toString(16);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.state.time !== nextState.time
+  }
+
 
   componentDidMount() {
     this.interval = setInterval(
