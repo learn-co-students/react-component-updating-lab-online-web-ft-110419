@@ -11,6 +11,13 @@ class Timer extends Component {
   }
 
   //Your code here
+  componentDidUpdate() {
+    this.timer.style.color = "#" + Math.floor(Math.random() * 16777215).toString(16)
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.time === nextState.time) return false
+    else return true 
+  }
 
   componentDidMount() {
     this.interval = setInterval(
@@ -34,6 +41,8 @@ class Timer extends Component {
       </section>
     );
   }
+
+
 
   clockTick = () => {
     this.setState(prevState => ({
